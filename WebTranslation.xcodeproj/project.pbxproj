@@ -23,6 +23,8 @@
 		773DBBA41FBFC03C009401A5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773DBBA31FBFC03C009401A5 /* Constants.swift */; };
 		773DBBA61FBFC093009401A5 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773DBBA51FBFC092009401A5 /* NavigationViewController.swift */; };
 		779CEFB01FC0408900F647C3 /* WebTranslationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779CEFAF1FC0408900F647C3 /* WebTranslationViewController.swift */; };
+		B16C476921007C9E001C8515 /* Action.js in Resources */ = {isa = PBXBuildFile; fileRef = B16C476821007C9E001C8515 /* Action.js */; };
+		B16C476B2100837C001C8515 /* Assets-Translation.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B16C476A2100837C001C8515 /* Assets-Translation.xcassets */; };
 		BFAEA2A41FC6CEBB0017EF5B /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAEA2A31FC6CEBB0017EF5B /* BaseViewController.swift */; };
 		BFAEA2A61FC6D18B0017EF5B /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAEA2A51FC6D18B0017EF5B /* Theme.swift */; };
 		CE5B9743D9C6308C69CBAC9E /* Pods_WebTranslationTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EB345162D4F07C83BAF272B /* Pods_WebTranslationTests.framework */; };
@@ -97,6 +99,8 @@
 		779CEFAF1FC0408900F647C3 /* WebTranslationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebTranslationViewController.swift; sourceTree = "<group>"; };
 		77FAD9E61FC06C8600BFB646 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		7C033E341110DD55B96DEC5C /* Pods_WebTranslationUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WebTranslationUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B16C476821007C9E001C8515 /* Action.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Action.js; sourceTree = "<group>"; };
+		B16C476A2100837C001C8515 /* Assets-Translation.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Assets-Translation.xcassets"; sourceTree = "<group>"; };
 		B6E4F3BD4474B2FD2889211B /* Pods-WebTranslationTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebTranslationTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WebTranslationTests/Pods-WebTranslationTests.release.xcconfig"; sourceTree = "<group>"; };
 		BFAEA2A31FC6CEBB0017EF5B /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		BFAEA2A51FC6D18B0017EF5B /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
@@ -199,7 +203,9 @@
 			children = (
 				7728372D1FBF1A8100C84C09 /* MainInterface.storyboard */,
 				7728371E1FBF075800C84C09 /* ActionViewController.swift */,
+				B16C476821007C9E001C8515 /* Action.js */,
 				772837231FBF075800C84C09 /* Info.plist */,
+				B16C476A2100837C001C8515 /* Assets-Translation.xcassets */,
 			);
 			path = Translation;
 			sourceTree = "<group>";
@@ -265,7 +271,6 @@
 				772836E51FBF069400C84C09 /* Resources */,
 				7728372A1FBF075800C84C09 /* Embed App Extensions */,
 				E3DE6708AC769E8D59C3A5DC /* [CP] Embed Pods Frameworks */,
-				E9F7B7DF6EC896CCA8E62918 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -285,8 +290,6 @@
 				772836F71FBF069400C84C09 /* Sources */,
 				772836F81FBF069400C84C09 /* Frameworks */,
 				772836F91FBF069400C84C09 /* Resources */,
-				5F4158049F2B8EA57CF7B7E9 /* [CP] Embed Pods Frameworks */,
-				B6CB38173E894A323E457F26 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -306,8 +309,6 @@
 				772837021FBF069400C84C09 /* Sources */,
 				772837031FBF069400C84C09 /* Frameworks */,
 				772837041FBF069400C84C09 /* Resources */,
-				DA2CEEB251982B1B0226CA4B /* [CP] Embed Pods Frameworks */,
-				C3B02146C579A6B877881B35 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -327,7 +328,6 @@
 				772837181FBF075800C84C09 /* Sources */,
 				772837191FBF075800C84C09 /* Frameworks */,
 				7728371A1FBF075800C84C09 /* Resources */,
-				0CB17703CF950A68AB0FF4B3 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -417,6 +417,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B16C476921007C9E001C8515 /* Action.js in Resources */,
+				B16C476B2100837C001C8515 /* Assets-Translation.xcassets in Resources */,
 				7728372E1FBF1A8200C84C09 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -424,21 +426,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0CB17703CF950A68AB0FF4B3 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Translation/Pods-Translation-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		10CE4460EF335547FCA17A88 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -511,66 +498,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		5F4158049F2B8EA57CF7B7E9 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WebTranslationTests/Pods-WebTranslationTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B6CB38173E894A323E457F26 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WebTranslationTests/Pods-WebTranslationTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C3B02146C579A6B877881B35 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WebTranslationUITests/Pods-WebTranslationUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DA2CEEB251982B1B0226CA4B /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WebTranslationUITests/Pods-WebTranslationUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		E3DE6708AC769E8D59C3A5DC /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -587,21 +514,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WebTranslation/Pods-WebTranslation-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E9F7B7DF6EC896CCA8E62918 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WebTranslation/Pods-WebTranslation-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -797,6 +709,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T8CE5P8P3Y;
 				INFOPLIST_FILE = WebTranslation/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Joe78.WebTranslation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -814,6 +727,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T8CE5P8P3Y;
 				INFOPLIST_FILE = WebTranslation/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Joe78.WebTranslation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -899,6 +813,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T8CE5P8P3Y;
 				INFOPLIST_FILE = Translation/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Joe78.WebTranslation.Translation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -915,6 +830,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T8CE5P8P3Y;
 				INFOPLIST_FILE = Translation/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Joe78.WebTranslation.Translation;
 				PRODUCT_NAME = "$(TARGET_NAME)";

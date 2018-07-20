@@ -1,8 +1,13 @@
 import UIKit
 import SnapKit
 
-class HomeViewController: BaseViewController {
+// UI 参考
+// https://play.google.com/store/apps/details?id=mark.via.gp
 
+// 截图
+// https://www.imore.com/how-quickly-translate-webpages-safari-iphone-and-ipad
+class HomeViewController: BaseViewController {
+    
     private struct Metric {
         static let topMargin = UIScreen.main.bounds.height * 0.25
         static let textFieldWidth = UIScreen.main.bounds.width * 0.87
@@ -42,7 +47,7 @@ class HomeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-    
+        
         setupConstraints()
         
         linkTextField.text = "www.github.com"
@@ -50,11 +55,11 @@ class HomeViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         navigationController?.setNavigationBarHidden(true, animated: false)
-//        navigationController?.navigationBar.isTranslucent = true
-//        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-//        navigationController?.navigationBar.shadowImage = UIImage()
+        //        navigationController?.navigationBar.isTranslucent = true
+        //        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        //        navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -76,7 +81,7 @@ class HomeViewController: BaseViewController {
 extension HomeViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         let margin = UIApplication.shared.statusBarFrame.maxY
-
+        
         linkTextFieldTopConstraint?.update(offset: margin)
         linkTextFieldWidthConstraint?.update(offset: view.frame.width)
         linkTextField.clipsToBounds = false

@@ -31,7 +31,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="options" id="Igl-GU-J8b">
                             <connections>
-                                <action selector="switchProducer:" destination="ObA-dk-sSI" id="7p0-Op-wcX"/>
+                                <action selector="switchEngine:" destination="ObA-dk-sSI" id="vne-Yk-6p8"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

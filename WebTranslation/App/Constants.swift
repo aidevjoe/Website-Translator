@@ -9,10 +9,7 @@ struct Closure {
 struct Constants {
 
     struct Config {
-        // App
-        static var baseURL = "https://www.v2ex.com"
-        
-        static var receiverEmail = "joesir7@foxmail.com"
+        static var receiverEmail = "aidevjoe@gmail.com"
 
         static var AppID = "1308118507"
     }

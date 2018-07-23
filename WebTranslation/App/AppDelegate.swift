@@ -1,11 +1,3 @@
-//
-//  AppDelegate.swift
-//  WebTranslation
-//
-//  Created by Joe-c on 2017/11/17.
-//  Copyright © 2017年 Joe-c. All rights reserved.
-//
-
 import UIKit
 
 @UIApplicationMain
@@ -15,7 +7,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        AppWindow.shared.prepare()
         return true
     }
 

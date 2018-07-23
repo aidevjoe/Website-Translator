@@ -1,115 +1,97 @@
 import UIKit
-import SnapKit
+import MessageUI
 
-// UI 参考
-// https://play.google.com/store/apps/details?id=mark.via.gp
-
-// 截图
-// https://www.imore.com/how-quickly-translate-webpages-safari-iphone-and-ipad
-class HomeViewController: BaseViewController {
+class HomeViewController: UIViewController {
     
-    private struct Metric {
-        static let topMargin = UIScreen.main.bounds.height * 0.25
-        static let textFieldWidth = UIScreen.main.bounds.width * 0.87
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
-    private struct Tinct {
-        static let textFieldBorderColor = UIColor.groupTableViewBackground
+    @IBAction func sendEmailAction(_ sender: UIBarButtonItem) {
+        sendEmail()
     }
-    
-    private lazy var linkTextField: UITextField = {
-        let view = UITextField()
-        view.placeholder = "输入网址"
-        let marginV = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
-        view.leftView = marginV
-        view.leftViewMode = .always
-        view.delegate = self
-        view.backgroundColor = .white
-        
-        view.layer.borderColor = Tinct.textFieldBorderColor.cgColor
-        view.layer.borderWidth = 0.6
-        
-        view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOpacity = 0.1
-        view.layer.shadowRadius = 4
-        
-        // 阴影向下偏移 6
-        view.layer.shadowOffset = CGSize(width: 0, height: 6)
-        view.clipsToBounds = true
-        view.returnKeyType = .search
-        self.view.addSubview(view)
-        return view
-    }()
-    
-    private var linkTextFieldTopConstraint: Constraint?
-    private var linkTextFieldWidthConstraint: Constraint?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         
-        setupConstraints()
-        
-        linkTextField.text = "www.github.com"
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        navigationController?.setNavigationBarHidden(true, animated: false)
-        //        navigationController?.navigationBar.isTranslucent = true
-        //        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        //        navigationController?.navigationBar.shadowImage = UIImage()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        navigationController?.setNavigationBarHidden(false, animated: false)
-    }
-    
-    private func setupConstraints() {
-        linkTextField.snp.makeConstraints{
-            linkTextFieldTopConstraint = $0.top.equalToSuperview().offset(Metric.topMargin).constraint
-            linkTextFieldWidthConstraint = $0.width.equalTo(Metric.textFieldWidth).constraint
-            $0.height.equalTo(50)
-            $0.centerX.equalToSuperview()
-        }
+        title = UIApplication.appDisplayName()
     }
 }
 
-extension HomeViewController: UITextFieldDelegate {
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        let margin = UIApplication.shared.statusBarFrame.maxY
+
+
+// MARK: - MFMailComposeViewControllerDelegate
+extension HomeViewController: MFMailComposeViewControllerDelegate {
+    
+    private func sendEmail() {
         
-        linkTextFieldTopConstraint?.update(offset: margin)
-        linkTextFieldWidthConstraint?.update(offset: view.frame.width)
-        linkTextField.clipsToBounds = false
-        
-        UIView.animate(withDuration: 0.25) {
-            self.linkTextField.layer.borderColor = UIColor.clear.cgColor
-            self.view.layoutIfNeeded()
+        guard MFMailComposeViewController.canSendMail() else {
+            let alert = UIAlertController(title: nil, message: "Operation failed.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Cancle", style: .cancel, handler: nil))
+            present(alert, animated: true, completion: nil)
+            return
         }
+        
+        let mailVC = MFMailComposeViewController()
+        mailVC.setSubject("\(UIApplication.appDisplayName()) iOS Feedback")
+        mailVC.setToRecipients([Constants.Config.receiverEmail])
+        mailVC.setMessageBody("\n\n\n\n[Operating environment] \(UIDevice.phoneModel)(\(UIDevice.current.systemVersion))-\(UIApplication.appVersion())(\(UIApplication.appBuild()))", isHTML: false)
+        mailVC.mailComposeDelegate = self
+        present(mailVC, animated: true, completion: nil)
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        dismiss(animated: true, completion: nil)
         
-        linkTextFieldTopConstraint?.update(offset: Metric.topMargin)
-        linkTextFieldWidthConstraint?.update(offset: Metric.textFieldWidth)
-        linkTextField.clipsToBounds = true
-        
-        UIView.animate(withDuration: 0.25) {
-            self.linkTextField.layer.borderColor = Tinct.textFieldBorderColor.cgColor
-            self.view.layoutIfNeeded()
+        switch result {
+        case .sent:
+            let alert = UIAlertController(title: nil, message: "Thanks for your feedback.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction.init(title: "Cancle", style: .cancel, handler: nil))
+            present(alert, animated: true, completion: nil)
+        case .failed:
+            let alert = UIAlertController(title: nil, message: "Failed to send mail\nError info: \(error?.localizedDescription ?? "Unkown")", preferredStyle: .alert)
+            alert.addAction(UIAlertAction.init(title: "Cancle", style: .cancel, handler: nil))
+            present(alert, animated: true, completion: nil)
+        default:
+            break
         }
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        linkTextField.resignFirstResponder()
-        let webView = WebTranslationViewController()
-        webView.urlString = textField.text
-        navigationController?.pushViewController(webView, animated: true)
-        return true
+        
     }
 }
 
+
+
+import UIKit
+
+@IBDesignable extension UIView {
+    @IBInspectable var borderColor:UIColor? {
+        set {
+            layer.borderColor = newValue?.cgColor
+        }
+        get {
+            if let color = layer.borderColor {
+                return UIColor.init(cgColor: color)
+            }
+            else {
+                return nil
+            }
+        }
+    }
+    @IBInspectable var borderWidth:CGFloat {
+        set {
+            layer.borderWidth = newValue
+        }
+        get {
+            return layer.borderWidth
+        }
+    }
+    @IBInspectable var cornerRadius:CGFloat {
+        set {
+            layer.cornerRadius = newValue
+            clipsToBounds = newValue > 0
+        }
+        get {
+            return layer.cornerRadius
+        }
+    }
+}

@@ -19,6 +19,7 @@
 		772837261FBF075800C84C09 /* Translation.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 7728371C1FBF075800C84C09 /* Translation.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		7728372E1FBF1A8200C84C09 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7728372D1FBF1A8100C84C09 /* MainInterface.storyboard */; };
 		773DBBA41FBFC03C009401A5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773DBBA31FBFC03C009401A5 /* Constants.swift */; };
+		B11CB21A2105C4DD00F6A113 /* error.html in Resources */ = {isa = PBXBuildFile; fileRef = B11CB2192105C4DD00F6A113 /* error.html */; };
 		B16C476921007C9E001C8515 /* Action.js in Resources */ = {isa = PBXBuildFile; fileRef = B16C476821007C9E001C8515 /* Action.js */; };
 		B16C476B2100837C001C8515 /* Assets-Translation.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B16C476A2100837C001C8515 /* Assets-Translation.xcassets */; };
 		B1786C532101E8B3000A0307 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1786C502101E8B3000A0307 /* NavigationViewController.swift */; };
@@ -95,6 +96,7 @@
 		773DBBA31FBFC03C009401A5 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		77FAD9E61FC06C8600BFB646 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		7C033E341110DD55B96DEC5C /* Pods_WebTranslationUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WebTranslationUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B11CB2192105C4DD00F6A113 /* error.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = error.html; sourceTree = "<group>"; };
 		B16C476821007C9E001C8515 /* Action.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Action.js; sourceTree = "<group>"; };
 		B16C476A2100837C001C8515 /* Assets-Translation.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Assets-Translation.xcassets"; sourceTree = "<group>"; };
 		B1786C502101E8B3000A0307 /* NavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 				B16C476821007C9E001C8515 /* Action.js */,
 				772837231FBF075800C84C09 /* Info.plist */,
 				B16C476A2100837C001C8515 /* Assets-Translation.xcassets */,
+				B11CB2192105C4DD00F6A113 /* error.html */,
 			);
 			path = Translation;
 			sourceTree = "<group>";
@@ -420,6 +423,7 @@
 				B16C476921007C9E001C8515 /* Action.js in Resources */,
 				B16C476B2100837C001C8515 /* Assets-Translation.xcassets in Resources */,
 				7728372E1FBF1A8200C84C09 /* MainInterface.storyboard in Resources */,
+				B11CB21A2105C4DD00F6A113 /* error.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -505,10 +509,12 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-WebTranslation/Pods-WebTranslation-frameworks.sh",
+				"${PODS_ROOT}/Reveal-SDK/RevealServer-8/iOS/RevealServer.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RevealServer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;

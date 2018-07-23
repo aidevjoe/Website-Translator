@@ -8,6 +8,7 @@ target 'Translation' do
   # Pods for Translation
 
   pod 'SnapKit'
+  pod 'Reveal-SDK', '~> 8', :configurations => ['Debug']
 
 end
 

@@ -75,9 +75,9 @@ class WebTranslationViewController: BaseViewController {
             $0.edges.equalToSuperview()
         }
         
-        activityIndicatorView.snp.makeConstraints {
-            $0.center.equalToSuperview()
-        }
+//        activityIndicatorView.snp.makeConstraints {
+//            $0.center.equalToSuperview()
+//        }
         
         progressView.snp.makeConstraints {
             $0.left.right.equalToSuperview()

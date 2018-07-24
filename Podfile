@@ -6,8 +6,7 @@ target 'Translation' do
   use_frameworks!
 
   # Pods for Translation
-
-  pod 'SnapKit'
+  
   pod 'Reveal-SDK', '~> 8', :configurations => ['Debug']
 
 end
@@ -17,15 +16,5 @@ target 'WebTranslation' do
   use_frameworks!
 
   # Pods for WebTranslation
-
-  target 'WebTranslationTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
-  target 'WebTranslationUITests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
 
 end

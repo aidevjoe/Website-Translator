@@ -1,13 +1,4 @@
 
-@page {
-    margin: .5cm;
-}
-
-p {
-    orphans: 3;
-    widows: 3;
-}
-
 body {
   margin: 0;
 }
@@ -17,19 +8,18 @@ img {
 }
 
 .steps-header {
-  color: #666;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
+  color: #fff;
+  text-align: left;
+  padding-left: 1.5em;
+/*  position: relative;*/
+/*  overflow: hidden;*/
 }
 
 .steps {
-  color: #222;
+  color: #fff;
   font-size: .9375em;
-  left: 5px;
-  max-width: 290px;
-  margin: 1.8em auto 1em;
-  padding: 0 0 0 20px;
+  max-width: 340px;
+  padding: 20 0 0 20px;
   position: relative;
   text-align: left;
 }
@@ -40,10 +30,9 @@ img {
 }
 
 .steps img {
-  border: 1px solid #ccc;
   display: block;
   max-width: 100%;
-  min-width: 285px;
+  min-width: 320px;
   margin-bottom: 1.8em;
   margin-left: -21px;
   margin-top: .85em;
@@ -52,3 +41,10 @@ img {
 .center {
   text-align: center;
 }
+
+body{
+    background: url(bg.png) ;
+    background-size: 100% 100%;
+    width: 100%;
+    height: 100%;
+

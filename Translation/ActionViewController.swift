@@ -1,110 +1,19 @@
 import UIKit
 import MobileCoreServices
 import WebKit
+import WebTranslationCore
 
-enum Engine {
-    case google
-    case bing
-    case baidu
-    case youdao
-    case yandex
-    
-    static var allCases: [Engine] {
-        return [.google, .bing, .baidu, .youdao, .yandex]
-    }
-    
-    var description: String {
-        switch self {
-        case .google:
-            return "Google"
-        case .bing:
-            return "Bing"
-        case .baidu:
-            return "Baidu"
-        case .youdao:
-            return "Youdao"
-        case .yandex:
-            return "Yandex"
-        }
-    }
-    
-    var script: String {
-        switch self {
-        case .google:
-            return "document.querySelector('#gt-nvframe').remove();document.querySelector('body').style.top = '0px';"
-        case .bing:
-            return "document.querySelector('#divBVHeader').remove();"
-        case .baidu:
-            return "document.querySelector('.header').remove();"
-        case .youdao:
-            return "document.querySelector('.yd-snap').remove();document.querySelector('.yd-snap-line').remove();"
-        case .yandex:
-            return "document.querySelector('#tr-stripe').remove();"
-        }
-    }
-}
-
-extension Engine {
-    
-    func build(url: String) -> String {
-        switch self {
-        case .google:
-            return "https://translate.google.com/translate?sl=auto&tl=cn&u=\(url)"
-        case .bing:
-            return "https://www.microsofttranslator.com/bv.aspx?from=&to=zh-CHS&a=\(url)"
-        case .baidu:
-            return "http://fanyi.baidu.com/transpage?query=\(url)&from=auto&to=zh&source=url&render=1"
-        case .youdao:
-            return "http://fanyi.youdao.com/WebpageTranslate?keyfrom=fanyi.web.index&url=\(url)"
-        case .yandex:
-            return "https://z5h64q92x9.net/tr-start?ui=en&url=\(url)&lang=en-zh"
-        }
-    }
-}
-
-/// http://api.fanyi.baidu.com/api/trans/product/apidoc#languageList
-enum BaiduStandard: String {
-    case auto  // 自动检测
-    case zh  // 中文
-    case en  // 英语
-    case yue  // 粤语
-    case wyw  // 文言文
-    case jp  // 日语
-    case kor  // 韩语
-    case fra  // 法语
-    case spa  // 西班牙语
-    case th  // 泰语
-    case ara  // 阿拉伯语
-    case ru  // 俄语
-    case pt  // 葡萄牙语
-    case de  // 德语
-    case it  // 意大利语
-    case el  // 希腊语
-    case nl  // 荷兰语
-    case pl  // 波兰语
-    case bul  // 保加利亚语
-    case est  // 爱沙尼亚语
-    case dan  // 丹麦语
-    case fin  // 芬兰语
-    case cs  // 捷克语
-    case rom  // 罗马尼亚语
-    case slo  // 斯洛文尼亚语
-    case swe  // 瑞典语
-    case hu  // 匈牙利语
-    case cht  // 繁体中文
-    case vie  // 越南语
-}
-
-/// https://cloud.google.com/translate/docs/languages
-enum GoogleStandard: String {
-    case af
-}
 
 class ActionViewController: UIViewController {
 
     private var isLoaded: Bool = false
     
-    private var engine: Engine = .google
+    private var engine: Engine = currentEngine() {
+        didSet {
+            shareDefaults?.set(engine.rawValue, forKey: "engine")
+            shareDefaults?.synchronize()
+        }
+    }
     
     private lazy var webView: WKWebView = {
         let webConfiguration = WKWebViewConfiguration()
@@ -155,16 +64,16 @@ class ActionViewController: UIViewController {
     
     private var url: String? {
         didSet {
-            self.translate()
+            self.translate(for: engine)
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         webView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
         
-        for item in self.extensionContext!.inputItems as! [NSExtensionItem] {
+        for item in self.extensionContext?.inputItems as! [NSExtensionItem] {
             for provider in item.attachments! as! [NSItemProvider] {
                 provider.loadItem(forTypeIdentifier: kUTTypePropertyList as String) { [unowned self] (dict, error) in
                     guard
@@ -197,7 +106,7 @@ class ActionViewController: UIViewController {
         webView.navigationDelegate = nil
     }
     
-    private func translate(for engine: Engine = .google) {
+    private func translate(for engine: Engine) {
         guard let `url` = url,
             let URL = URL(string: engine.build(url: url)) else { return }
         self.engine = engine
@@ -212,7 +121,7 @@ class ActionViewController: UIViewController {
 
     @IBAction func switchEngine(_ sender: UIBarButtonItem) {
         
-        let alertController = UIAlertController(title: "选择引擎", message: nil, preferredStyle: .actionSheet)
+        let alertController = UIAlertController(title: "Select engine", message: nil, preferredStyle: .actionSheet)
 
         let allCases = Engine.allCases
         let action: ((UIAlertAction) -> Void) = { [weak self] alert in
@@ -223,7 +132,7 @@ class ActionViewController: UIViewController {
         
         allCases.forEach { alertController.addAction(UIAlertAction(title: $0.description, style: .default, handler: action))}
         
-        alertController.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(alertController, animated: true, completion: nil)
     }
 }
@@ -269,16 +178,16 @@ extension ActionViewController: WKNavigationDelegate {
     
     /// 网页开始加载
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        print("didStartProvisionalNavigation")
+        if webView.url?.absoluteString == "webtranslator://refresh" {
+            self.translate(for: self.engine)
+        }
     }
     
     /// 网页加载完成
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         switch engine {
         case .google:
-            if (webView.url?.path ?? "") == "/translate_c" {
-                webView.isHidden = false
-            }
+            webView.isHidden = (webView.url?.path ?? "") != "/translate_c"
         default:
             webView.isHidden = false
         }
@@ -286,16 +195,27 @@ extension ActionViewController: WKNavigationDelegate {
     
     /// 网页加载失败
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        print(error)
+        print(error, webView.url)
     }
     
     func webView(_ webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!) {
-//        print(webView.url)
+        print(webView.url)
     }
     
     ///  网页返回内容时发生的失败
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        print(error.localizedDescription)
+        // NSURLErrorDomain
+        if [-1002, -999].contains((error as NSError).code) {
+            return
+        }
+        let alertController = UIAlertController(title: url, message: error.localizedDescription, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK.", style: .cancel, handler: { _ in
+            guard let url = Bundle.main.url(forResource: "error", withExtension: "html") else { return }
+            webView.isHidden = false
+            webView.load(URLRequest(url: url))
+        }))
+        present(alertController, animated: true, completion: nil)
+        
     }
     
     /// 网页进程终止
@@ -304,7 +224,7 @@ extension ActionViewController: WKNavigationDelegate {
     }
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-
+        print(webView.url)
         if engine == .google,
             let url = navigationAction.request.url,
             ["/translate_nv"].contains(url.path) { // Google 的翻译工具条 请求

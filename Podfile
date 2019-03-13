@@ -7,7 +7,7 @@ target 'Translation' do
 
   # Pods for Translation
   
-  pod 'Reveal-SDK', '~> 8', :configurations => ['Debug']
+  pod 'Reveal-SDK', '~> 20', :configurations => ['Debug']
 
 end
 

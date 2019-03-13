@@ -25,7 +25,7 @@ extension NavigationViewController {
     }
     
     override var prefersStatusBarHidden : Bool {
-        return UIInterfaceOrientationIsLandscape(UIApplication.shared.statusBarOrientation) && UI_USER_INTERFACE_IDIOM() == .phone
+        return UIApplication.shared.statusBarOrientation.isLandscape && UI_USER_INTERFACE_IDIOM() == .phone
     }
     
     override var preferredStatusBarUpdateAnimation : UIStatusBarAnimation {

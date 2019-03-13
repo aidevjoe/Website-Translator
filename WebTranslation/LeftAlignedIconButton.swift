@@ -6,7 +6,7 @@ class LeftAlignedIconButton: UIButton {
         contentHorizontalAlignment = .left
         super.layoutSubviews()
         layer.cornerRadius = bounds.height / 2
-        imageEdgeInsets = UIEdgeInsetsMake(0, 12.0, 0, 12.0)
+        imageEdgeInsets = UIEdgeInsets(top: 0, left: 12.0, bottom: 0, right: 12.0)
     }
     
     override func titleRect(forContentRect contentRect: CGRect) -> CGRect {

@@ -50,7 +50,7 @@ extension SelectLanguageViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCell(withIdentifier: "Cell")
         if cell == nil {
-            cell = UITableViewCell.init(style: UITableViewCellStyle.default, reuseIdentifier: "Cell")
+            cell = UITableViewCell.init(style: UITableViewCell.CellStyle.default, reuseIdentifier: "Cell")
             cell?.backgroundColor = .clear
             cell?.textLabel?.textColor = .white
             let view = UIView(frame: cell!.bounds)
